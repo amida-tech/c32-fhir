@@ -54,7 +54,7 @@ describe('C32 parser test', function () {
 
     });
 
-    /*it('"mhv_VA_CCD_WATSON_20140909_1002" as input', function (done) {
+    it('"mhv_VA_CCD_WATSON_20140909_1002" as input', function (done) {
 
         testoOn(__dirname + '/../../private-records/blue-button/tests/proprietary/watson/mhv_VA_CCD_WATSON_20140909_1002.xml',
             __dirname + '/artifacts/mhv_VA_CCD_WATSON_20140909_1002.json',
@@ -62,6 +62,6 @@ describe('C32 parser test', function () {
             done
         );
 
-    });*/
+    });
 
 });
