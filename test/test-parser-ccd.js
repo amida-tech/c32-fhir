@@ -5,27 +5,36 @@
 var expect = require('chai').expect;
 var fs = require('fs');
 var request = require('request');
+var _ = require('lodash');
 
 var bbcms = require("../index");
 
 var testoOn = function (infile, outfile, goldfile, done) {
     var istream = fs.createReadStream(infile, 'utf-8');
-    expect(istream).to.exist;
-
     istream
-        .pipe(new bbcms.C32ParserStream())
+        .pipe(new bbcms.C32ParserStream("test"))
         .on('data', function (data) {
             expect(data).to.exist;
-            fs.writeFile(outfile, JSON.stringify(data, null, '  '));
-
-            if (goldfile) {
-                var gold = fs.readFileSync(goldfile, 'utf-8');
-                expect(JSON.parse(gold)).to.eql(data);
-            }
-
-        })
-        .on('finish', function () {
-            done();
+            fs.writeFile(outfile, JSON.stringify(data, null, '  '), function (err2) {
+                if (err2) {
+                    return done(err2);
+                }
+                fs.readFile(goldfile, function (err, data2) {
+                    if (err) {
+                        return done(); // Not an error, just skip comparison
+                    }
+                    try {
+                        expect(JSON.parse(data2.toString())).to.be.eql(data);
+                        return done(err);
+                        if (_.isEqual(JSON.parse(data2.toString()), data))
+                            return done(err);
+                        else
+                            return done(new Error("Compare fails"));
+                    } catch (ee) {
+                        return done(ee);
+                    }
+                });
+            });
         })
         .on('error', function (error) {
             done(error);
@@ -40,13 +49,10 @@ describe('C32 parser test', function () {
         var data = request.get('https://raw.githubusercontent.com/amida-tech/blue-button/master/test/fixtures/parser-c32/VA_CCD_Sample_File_Version_12_5_1.xml');
 
         data
-            .pipe(new bbcms.C32ParserStream())
+            .pipe(new bbcms.C32ParserStream('test'))
             .on('data', function (data) {
                 expect(data).to.exist;
-                fs.writeFile(__dirname + '/artifacts/VA_CCD_Sample_File_Version_12_5_1.json', JSON.stringify(data, null, '  '));
-            })
-            .on('finish', function () {
-                done();
+                fs.writeFile(__dirname + '/artifacts/VA_CCD_Sample_File_Version_12_5_1.json', JSON.stringify(data, null, '  '), function (err2) { done(err2); });
             })
             .on('error', function (error) {
                 done(error);
@@ -59,8 +65,7 @@ describe('C32 parser test', function () {
         testoOn(__dirname + '/../../private-records/blue-button/tests/proprietary/watson/mhv_VA_CCD_WATSON_20140909_1002.xml',
             __dirname + '/artifacts/mhv_VA_CCD_WATSON_20140909_1002.json',
             __dirname + '/artifacts/mhv_VA_CCD_WATSON_20140909_1002-gold.json',
-            done
-        );
+            done);
 
     });
 
