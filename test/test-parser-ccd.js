@@ -25,11 +25,12 @@ var testoOn = function (infile, outfile, goldfile, done) {
                     }
                     try {
                         expect(JSON.parse(data2.toString())).to.be.eql(data);
-                        return done(err);
-                        if (_.isEqual(JSON.parse(data2.toString()), data))
+                        //return done(err);
+                        if (_.isEqual(JSON.parse(data2.toString()), data)) {
                             return done(err);
-                        else
+                        } else {
                             return done(new Error("Compare fails"));
+                        }
                     } catch (ee) {
                         return done(ee);
                     }
@@ -52,7 +53,9 @@ describe('C32 parser test', function () {
             .pipe(new bbcms.C32ParserStream('test'))
             .on('data', function (data) {
                 expect(data).to.exist;
-                fs.writeFile(__dirname + '/artifacts/VA_CCD_Sample_File_Version_12_5_1.json', JSON.stringify(data, null, '  '), function (err2) { done(err2); });
+                fs.writeFile(__dirname + '/artifacts/VA_CCD_Sample_File_Version_12_5_1.json', JSON.stringify(data, null, '  '), function (err2) {
+                    done(err2);
+                });
             })
             .on('error', function (error) {
                 done(error);
