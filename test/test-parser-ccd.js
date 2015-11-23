@@ -53,9 +53,9 @@ describe('C32 parser test', function () {
             .pipe(new bbcms.C32ParserStream('test'))
             .on('data', function (data) {
                 expect(data).to.exist;
-                fs.writeFile(__dirname + '/artifacts/VA_CCD_Sample_File_Version_12_5_1.json', JSON.stringify(data, null, '  '), function (err2) {
+                /*fs.writeFile(__dirname + '/artifacts/VA_CCD_Sample_File_Version_12_5_1.json', JSON.stringify(data, null, '  '), function (err2) {
                     done(err2);
-                });
+                });*/
             })
             .on('error', function (error) {
                 done(error);
@@ -63,13 +63,13 @@ describe('C32 parser test', function () {
 
     });
 
-    it('"mhv_VA_CCD_WATSON_20140909_1002" as input', function (done) {
+    /*it('"mhv_VA_CCD_WATSON_20140909_1002" as input', function (done) {
 
         testoOn(__dirname + '/../../private-records/blue-button/tests/proprietary/watson/mhv_VA_CCD_WATSON_20140909_1002.xml',
             __dirname + '/artifacts/mhv_VA_CCD_WATSON_20140909_1002.json',
             __dirname + '/artifacts/mhv_VA_CCD_WATSON_20140909_1002-gold.json',
             done);
 
-    });
+    });*/
 
 });
