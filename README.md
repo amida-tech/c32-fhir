@@ -5,7 +5,7 @@ Convert C32 xml to FHIR bundle
 
 [![NPM](https://nodei.co/npm/c32-fhir.png)](https://nodei.co/npm/c32-fhir/)
 
-[![Build Status](https://travis-ci.org/amida-tech/c32-fhir.svg)](https://travis-ci.org/amida-tech/c32-fhir) [![Coverage Status](https://coveralls.io/repos/amida-tech/c32-fhir/badge.svg?branch=master&service=github)](https://coveralls.io/github/amida-tech/c32-fhir?branch=master) [![Dependency Status](https://david-dm.org/amida-tech/c32-fhir.svg)](https://david-dm.org/amida-techc32-fhir)
+[![Build Status](https://travis-ci.org/amida-tech/c32-fhir.svg)](https://travis-ci.org/amida-tech/c32-fhir) [![Coverage Status](https://coveralls.io/repos/amida-tech/c32-fhir/badge.svg?branch=master&service=github)](https://coveralls.io/github/amida-tech/c32-fhir?branch=master) [![Dependency Status](https://david-dm.org/amida-tech/c32-fhir.svg)](https://david-dm.org/amida-tech/c32-fhir)
 
 This library provides the following functionality
 - Parse XML document using [sax js](https://github.com/isaacs/sax-js) parser
