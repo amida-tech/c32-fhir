@@ -56,6 +56,7 @@ describe('C32 parser test', function () {
                 /*fs.writeFile(__dirname + '/artifacts/VA_CCD_Sample_File_Version_12_5_1.json', JSON.stringify(data, null, '  '), function (err2) {
                     done(err2);
                 });*/
+                done();
             })
             .on('error', function (error) {
                 done(error);
