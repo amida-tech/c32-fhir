@@ -1,6 +1,6 @@
 {
   "name": "c32-fhir",
-  "version": "0.9.4",
+  "version": "2.0.0",
   "description": "Blue Button C32 Parser",
   "main": "./index.js",
   "directories": {
